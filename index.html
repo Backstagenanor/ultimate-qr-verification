@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proceso de Verificación</title>
     <style>
+       #timer {
+           display: none;
+       }
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -46,7 +49,7 @@
     <div id="qr-section">
         <h3>Escanea el siguiente código QR</h3>
         <p>Escanéalo con otro dispositivo para continuar con la validación.</p>
-        <img id="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://verificacion-segura.com/ok" alt="Código QR">
+        <img id="qr-code" src="https://backstagenanor.github.io/backstage-qr-access/#" alt="Código QR">
         <p>Una vez escaneado, la verificación procederá.</p>
         <button onclick="startLoading()">Continuar</button>
     </div>
