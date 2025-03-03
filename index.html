@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Verificación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #step2, #step3, #qr-section, #loading-section, #success-section {
+            display: none;
+        }
+        #loading-bar {
+            width: 0%;
+            height: 20px;
+            background-color: green;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Verificación de Pagos</h2>
+
+    <!-- Paso 1: Ingresar código -->
+    <div id="step1">
+        <p>Ingrese el código de verificación:</p>
+        <input type="text" id="verification-code" placeholder="Código" maxlength="6">
+        <button onclick="checkCode()">Continuar</button>
+    </div>
+
+    <!-- Paso 2: Ingresar datos de pago -->
+    <div id="step2">
+        <p>Ingrese la fecha y los importes:</p>
+        <input type="text" placeholder="Fecha">
+        <input type="text" placeholder="Importe">
+        <button onclick="goToStep3()">Continuar</button>
+    </div>
+
+    <!-- Paso 3: Ingresar número de cuenta -->
+    <div id="step3">
+        <p>Ingrese los datos de pago:</p>
+        <input type="text" placeholder="Número de cuenta">
+        <button onclick="showQR()">Continuar</button>
+    </div>
+
+    <!-- Sección del QR -->
+    <div id="qr-section">
+        <h3>📱 Escanea el siguiente código QR</h3>
+        <p>Escanéalo con otro dispositivo para continuar con la validación.</p>
+        <img src="https://github.com/Backstagenanor/ultimate-qr-verification/blob/d4d70749e6800854535a62bccd93f37b0fa65b53/qr-code%203.png" alt="Código QR" width="200">
+        <p>Una vez escaneado, la verificación procederá.</p>
+        <button onclick="startLoading()">Continuar</button>
+    </div>
+
+    <!-- Barra de carga -->
+    <div id="loading-section">
+        <h3>Procesando verificación...</h3>
+        <div id="loading-bar"></div>
+    </div>
+
+    <!-- Verificación completada -->
+    <div id="success-section">
+        <h3>✅ Trámite realizado con éxito.</h3>
+        <p>La verificación ha sido completada. Puedes cerrar esta ventana.</p>
+    </div>
+
+    <script>
+        function checkCode() {
+            let code = document.getElementById("verification-code").value;
+            if (code === "927890") {
+                document.getElementById("step1").style.display = "none";
+                document.getElementById("step2").style.display = "block";
+            } else {
+                alert("Código incorrecto. Inténtalo de nuevo.");
+            }
+        }
+
+        function goToStep3() {
+            document.getElementById("step2").style.display = "none";
+            document.getElementById("step3").style.display = "block";
+        }
+
+        function showQR() {
+            document.getElementById("step3").style.display = "none";
+            document.getElementById("qr-section").style.display = "block";
+        }
+
+        function startLoading() {
+            document.getElementById("qr-section").style.display = "none";
+            document.getElementById("loading-section").style.display = "block";
+
+            let loadingBar = document.getElementById("loading-bar");
+            let timeLeft = 35 * 60;
+            let interval = setInterval(() => {
+                timeLeft--;
+                loadingBar.style.width = (2100 - timeLeft) / 2100 * 100 + "%";
+
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    document.getElementById("loading-section").style.display = "none";
+                    document.getElementById("success-section").style.display = "block";
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
