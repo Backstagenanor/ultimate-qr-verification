@@ -18,6 +18,7 @@
             height: 20px;
             background-color: green;
             margin-top: 20px;
+            transition: width 1s linear; /* Transición suave */
         }
     </style>
 </head>
@@ -94,10 +95,15 @@
             document.getElementById("loading-section").style.display = "block";
 
             let loadingBar = document.getElementById("loading-bar");
-            let timeLeft = 38 * 60;
+            let totalTime = 50 * 60; // 50 minutos en segundos
+            let timeLeft = totalTime;
+
             let interval = setInterval(() => {
                 timeLeft--;
-                loadingBar.style.width = (2100 - timeLeft) / 2100 * 100 + "%";
+
+                // Calcula el progreso en porcentaje
+                let progress = ((totalTime - timeLeft) / totalTime) * 100;
+                loadingBar.style.width = progress + "%"; 
 
                 if (timeLeft <= 0) {
                     clearInterval(interval);
